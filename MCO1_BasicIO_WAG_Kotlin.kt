@@ -137,6 +137,7 @@ fun withdrawAmount(){
 
 fun recordExchangeRate(){
     var validChoice = false
+    var validAmount = false
     var exchangeRate = 0.00
     var selectedCurrency = 0
 
@@ -161,8 +162,17 @@ fun recordExchangeRate(){
         }
     }
 
-    print("Exchange Rate: ")
-    exchangeRate = readln().toDouble()
+    while (!validAmount) {
+        print("\nExchange Rate: ")
+        val amount = readln().toDoubleOrNull()
+
+        if (amount == null || amount < 0) {
+            println("ERROR: Please enter a valid amount.")
+        } else {
+            exchangeRate = amount
+            validAmount = true
+        }
+    }
 
     println("\n***")
     println("Select Foreign Currency = [$selectedCurrency]")
