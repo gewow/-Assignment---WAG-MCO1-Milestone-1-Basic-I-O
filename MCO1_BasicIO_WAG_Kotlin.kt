@@ -12,6 +12,8 @@ fun main() {
     registerAccountName()
     depositAmount()
     withdrawAmount()
+    currencyExchange()
+    recordExchangeRate()
 }
 
 fun mainMenu() {
@@ -133,5 +135,68 @@ fun withdrawAmount(){
     println("Withdraw Amount = ${"%.2f".format(withdrawedAmount)}")
 }
 
+fun recordExchangeRate(){
+    var validChoice = false
+    var exchangeRate = 0.00
+    var selectedCurrency = 0
 
+    println("\nRecord Exchange Rate")
+    println("\n")
+    println("[1] Philippine Peso (PHP)")
+    println("[2] United States Dollar (USD)")
+    println("[3] Japanese Yen (JPY)")
+    println("[4] British Pound Sterling (GBP)")
+    println("[5] Euro (EUR)")
+    println("[6] Chinese Yuan Renminni (CNY)")
 
+    while (!validChoice){
+        print("\nChoice: ")
+        val choice = readln().toIntOrNull()
+        if (choice == null || choice <= 0 || choice > 6) {
+            println("ERROR: Please choose a valid input.")
+        }
+        else {
+            selectedCurrency=choice
+            validChoice=true
+        }
+    }
+
+    print("Exchange Rate: ")
+    exchangeRate = readln().toDouble()
+
+    println("\n***")
+    println("Select Foreign Currency = [$selectedCurrency]")
+    println("Exchange Rate = [%.2f]".format(exchangeRate))
+}
+
+fun currencyExchange(){
+    var validAmount=false
+    var sourceAmount=0.00
+    var defaultSourceCurrency = "Philippine Peso (PHP)"
+
+    print("\nForeign Currency Exchange")
+
+    while(!validAmount){
+        println("Source Amount(PHP): ")
+        val input=readln().toDoubleOrNull()
+
+        if(input==null||input<0){
+            println("ERROR: Please enter a valid amount")
+        }else{
+            sourceAmount = input
+            validAmount = true
+        }
+    }
+
+    println("\nExchanged Currency")
+    println("[1] Philippine Peso (PHP) = [%.2f]".format(sourceAmount))
+    println("[2] United States Dollar (USD) = [%.2f]".format(sourceAmount * 62.00))
+    println("[3] Japanese Yen (JPY) = [%.2f]".format(sourceAmount * 0.40))
+    println("[4] British Pound Sterling (GBP) = [%.2f]".format(sourceAmount * 84.00))
+    println("[5] Euro (EUR) = [%.2f]".format(sourceAmount * 72.00))
+    println("[6] Chinese Yuan Renminni (CNY) = [%.2f]".format(sourceAmount * 9.00))
+
+    println("***")
+    println("Source Currency = $defaultSourceCurrency")
+    println("Source Amount = [%.2f]".format(sourceAmount))
+}
